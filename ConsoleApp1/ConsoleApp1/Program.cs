@@ -24,18 +24,24 @@ namespace ConsoleApp1
             Console.Write("1)-> SIGN-IN \n");
             Console.Write("2)-> SIGN-UP \n");
             string opcion1;
-
-            opcion1 = Convert.ToString(Console.ReadLine());
-            if (opcion1 == "1")
+            do
             {
-                ges.Login();
-                ges.VerifyLogin();
+                opcion1 = Convert.ToString(Console.ReadLine());
+                if (opcion1 == "1")
+                {
+                    ges.Login();
+                    ges.VerifyLogin();
 
-            }
-            if (opcion1 == "2")
-            {
-                ges.Registrarse();
-            }
+                }
+                if (opcion1 == "2")
+                {
+                    ges.Registrarse();
+                    Console.Write("\n");
+                    Console.Write("Volver al menu? Presione (0)");
+                    opcion1 = Convert.ToString(Console.ReadLine());
+                    Console.Clear();
+                }
+            } while (opcion1 == "0");
 
             Console.WriteLine(" \n --------------Menú----------- \n");
             foreach (Persona yu in ges.Base)
