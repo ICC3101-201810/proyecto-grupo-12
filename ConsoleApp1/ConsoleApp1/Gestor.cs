@@ -52,15 +52,27 @@ namespace ConsoleApp1
         }
         public void VerifyLogin()
         {
+            int contador1=0;
             foreach (Persona c in Base)
             {
-                if(c.UsuarioID== usuario && c.Contrasena== contraseña)
+                if (usuario != c.UsuarioID && contraseña != c.Contrasena)
+                {
+                    contador1 = contador1 + 1;
+                    continue; 
+                }
+                else
                 {
                     Console.Write("Bienvenido " + c.Nombre);
+                    break;
                 }
-                else { Console.Write("Acceso denegado"); }
+            }
+            int c2 = Base.Count;
+            if (contador1>=c2)
+            {
+                Console.Write("Acceso Denegado");
             }
             Console.ReadKey();
+            
         }
 
     }
