@@ -42,10 +42,10 @@ namespace ConsoleApp1
                     opcion2 = Convert.ToString(Console.ReadLine());
 
                     if (opcion2=="1")
-                    { ges.Registrarse();}
-                    if(opcion2=="2")
+                    { ges.Actualizar(yu);}
+                    if (opcion2=="2")
                     {
-                        
+
                     }
 
 

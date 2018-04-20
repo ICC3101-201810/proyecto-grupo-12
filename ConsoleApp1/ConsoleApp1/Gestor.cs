@@ -73,6 +73,24 @@ namespace ConsoleApp1
             }
             
         }
+        public void Actualizar(Persona yo)
+        {
+            Console.WriteLine("Ingrese su nombre:   \n");
+            yo.Nombre = (Console.ReadLine());
+            Console.WriteLine("Ingrese su mail:   \n");
+            yo.Email = (Console.ReadLine());
+            Console.WriteLine("Ingrese su carrera:   \n");
+            yo.Carrera = (Console.ReadLine());
+            Console.WriteLine("Ingrese su telefono:   \n");
+            yo.Numero = (Console.ReadLine());
+            Console.WriteLine("Ingrese su ocupacion(Estudiante, Empleado, etc):   \n");
+            yo.Ocupacion = (Console.ReadLine());
+            Console.WriteLine("Ingrese su USUARIO(RUT):   \n");
+            yo.UsuarioID = (Console.ReadLine());
+            Console.WriteLine("Ingrese su CONTRASEÑA:   \n");
+            yo.Contrasena = (Console.ReadLine());
+
+        }
 
     }
 }
