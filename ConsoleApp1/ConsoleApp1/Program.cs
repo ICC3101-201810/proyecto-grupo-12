@@ -11,6 +11,8 @@ namespace ConsoleApp1
         static void Main(string[] args)
         {
             Gestor ges = new Gestor();
+            Reserva res1 = new Reserva("cancha", "26/04", "15:00", "16:00", "emma Donoso");
+            ges.ListaReserva.Add(res1);
             Persona pes1 = new Persona("emma Donoso", "emma@miuandes.cl", "ingenieria", "97096544", "estudiante", "260249967","12345","no");
             Persona pes2 = new Persona("juanito", "emma@miuandes.cl", "ingenieria", "97096544", "estudiante", "12345", "123456","no");
             ges.Base.Add(pes1);
@@ -45,7 +47,8 @@ namespace ConsoleApp1
                     { ges.Actualizar(yu);}
                     if (opcion2=="2")
                     {
-
+                        ges.addRes(yu);
+                        
                     }
 
 

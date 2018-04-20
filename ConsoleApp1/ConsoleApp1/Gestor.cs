@@ -11,6 +11,8 @@ namespace ConsoleApp1
     {
         string usuario, contraseña;
         public List<Persona> Base = new List<Persona>();
+        public List<Reserva> ListaReserva = new List<Reserva>();
+        public List<Reserva> ReservasApro = new List<Reserva>();
 
         public Gestor()
         {
@@ -92,6 +94,47 @@ namespace ConsoleApp1
 
         }
 
+        public void addRes(Persona yo)
+        {
+            string tipo,dia,horaini,horafin,usuario1;
+            Console.WriteLine("Ingrese tipo de espacio a reservar Estudios o Cancha:   \n");
+            tipo= (Console.ReadLine());
+            Console.WriteLine("Ingrese el dia a reservar:   \n");
+            dia = (Console.ReadLine());
+            Console.WriteLine("Ingrese hora inicio:   \n");
+            horaini = (Console.ReadLine());
+            Console.WriteLine("Ingrese su hora de fin:   \n");
+            horafin = (Console.ReadLine());
+            usuario1 = yo.Nombre;
+            
+            Reserva res1 = new Reserva(tipo,dia,horaini,horafin,usuario1);
+            ListaReserva.Add(res1);
+            VerifyRes(res1);
+        }
+        public void VerifyRes(Reserva reserva)
+        {
+            int contador2 = 0;
+            foreach(Reserva r in ListaReserva)
+            {
+                if (reserva.Dia== r.Dia && reserva.HoraInicio == r.HoraInicio && reserva.HoraFin == r.HoraFin)
+                {
+                    contador2 = contador2 + 1;
+                    continue;
+                }
+                else
+                {
+                    ReservasApro.Add(reserva);
+                    Console.WriteLine("Reserva hecha para el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin);
+
+                }
+            }
+            int c3 = ListaReserva.Count;
+            if(contador2>= c3)
+            {
+                Console.Write("No hay reservas disponibles con su requerimiento.");
+            }
+            Console.ReadKey();
+        }
     }
 }
 

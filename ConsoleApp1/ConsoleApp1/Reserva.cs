@@ -8,17 +8,18 @@ namespace ConsoleApp1
 {
     public class Reserva
     {
-        string Tipo, Dia, HoraInicio, HoraFin, Nombre;
-        List<string> ListaAlum = new List<string>();
+        public string Tipo, Dia, HoraInicio, HoraFin ,uid;
+        
 
-        public Reserva(string tipo, string dia, string inicio, string fin, string nom)
+        public Reserva(string tipo, string dia, string inicio, string fin,string uid)
         {
             Tipo = tipo;
             Dia = dia;
             HoraInicio = inicio;
             HoraFin = fin;
-            Nombre = nom;
+            this.uid = uid;
         }
+
 
     }
 }
