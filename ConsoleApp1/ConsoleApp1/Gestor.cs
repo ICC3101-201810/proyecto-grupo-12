@@ -43,6 +43,7 @@ namespace ConsoleApp1
         {
             
             Console.Write("-----------Login-------------- \n");
+            Console.Write("\n");
             Console.Write("Ingrese su usuario: ");
             usuario = (Console.ReadLine());
             Console.Write("Ingrese su contraseña: ");
@@ -55,16 +56,19 @@ namespace ConsoleApp1
             int contador1=0;
             foreach (Persona c in Base)
             {
-                if (usuario != c.UsuarioID && contraseña != c.Contrasena)
+                if (usuario == c.UsuarioID)  
                 {
-                    contador1 = contador1 + 1;
-                    continue; 
+                    if (contraseña == c.Contrasena)
+                    {
+                        Console.Write("Bienvenido " + c.Nombre + "\n");
+                        c.LoginStatus = "si";
+                        break;
+                    } 
                 }
                 else
                 {
-                    Console.Write("Bienvenido " + c.Nombre +"\n");
-                    c.LoginStatus = "si";
-                    break;
+                    contador1 = contador1 + 1;
+                    continue;
                 }
             }
             int c2 = Base.Count;
@@ -92,6 +96,8 @@ namespace ConsoleApp1
             Console.WriteLine("Ingrese su CONTRASEÑA:   \n");
             yo.Contrasena = (Console.ReadLine());
 
+            Console.Write("Sus nuevos datos son, NOMBRE: " + yo.Nombre + " MAIL: " + yo.Email + " CARRERA: " + yo.Numero + " OCUPACION: " + yo.Ocupacion + " RUT: " + yo.UsuarioID);
+
         }
 
         public void addRes(Persona yo)
@@ -116,7 +122,7 @@ namespace ConsoleApp1
             int contador2 = 0;
             foreach(Reserva r in ListaReserva)
             {
-                if (reserva.Dia== r.Dia && reserva.HoraInicio == r.HoraInicio && reserva.HoraFin == r.HoraFin)
+                if (reserva.Tipo== r.Tipo && reserva.Dia == r.Dia&& reserva.HoraInicio == r.HoraInicio)
                 {
                     contador2 = contador2 + 1;
                     continue;
@@ -124,16 +130,17 @@ namespace ConsoleApp1
                 else
                 {
                     ReservasApro.Add(reserva);
-                    Console.WriteLine("Reserva hecha para el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin);
+                    Console.Clear();
+                    Console.WriteLine("Reserva hecha para un espacio de tipo "+reserva.Tipo+ " el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin+"\n");
 
                 }
             }
             int c3 = ListaReserva.Count;
             if(contador2>= c3)
             {
-                Console.Write("No hay reservas disponibles con su requerimiento.");
+                Console.Write("No hay reservas disponibles con su requerimiento. \n");
             }
-            Console.ReadKey();
+           
         }
     }
 }
