@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReposApp", "ConsoleApp1\ReposApp.csproj", "{3626F740-0A3C-4646-BC53-A62F1B87E641}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3626F740-0A3C-4646-BC53-A62F1B87E641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3626F740-0A3C-4646-BC53-A62F1B87E641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3626F740-0A3C-4646-BC53-A62F1B87E641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3626F740-0A3C-4646-BC53-A62F1B87E641}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {46059C9C-2779-4F6B-BA81-5650D38D25CD}
+	EndGlobalSection
+EndGlobal
