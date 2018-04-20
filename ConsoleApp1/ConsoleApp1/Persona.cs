@@ -8,7 +8,7 @@ namespace ConsoleApp1
 {
     public class Persona : Usuario
     {
-        string Nombre, Email, Carrera, Numero, Ocupacion;
+        public string Nombre, Email, Carrera, Numero, Ocupacion;
 
         public Persona(string nom, string mail, string car, string num, string ocu, string uId, string contra) : base(uId, contra)
         {

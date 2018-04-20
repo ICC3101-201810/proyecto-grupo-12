@@ -12,6 +12,7 @@ namespace ConsoleApp1
         {
             Gestor ges = new Gestor();
             Persona pes1 = new Persona("Johnny Donoso", "jadonoso2@miuandes.cl", "ingenieria", "97096544", "estudiante", "195287643","5436232");
+            ges.Base.Add(pes1);
             Console.Write("Desea hacer SIGN-IN(1) o SIGN-UP(2): ");
             string opcion1;
 
@@ -27,7 +28,9 @@ namespace ConsoleApp1
                 ges.Registrarse();
             }
 
-            Console.ReadKey();
+            Console.Write()
+
+            
         }
     }
 }

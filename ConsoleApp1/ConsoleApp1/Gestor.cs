@@ -8,13 +8,11 @@ namespace ConsoleApp1
 {
     public class Gestor
     {
-        string usuario, contraseña;
+        string usuario, contraseña,d;
         List<string> Reserva = new List<string>();
         List<string> CantCanchas = new List<string>();
         List<string> CantSalas = new List<string>();
-        List<string> UsuariosID = new List<string>();
-        List<string> Contras = new List<string>();
-        List<Persona> Base = new List<Persona>();
+        public List<Persona> Base = new List<Persona>();
 
         public Gestor()
         {
@@ -39,8 +37,7 @@ namespace ConsoleApp1
             contra = (Console.ReadLine());
             Persona p1 = new Persona(nom, mail, car, num, ocu, uId, contra);
             Base.Add(p1);
-            UsuariosID.Add(uId);
-            Contras.Add(contra);
+         
         }
         public void Login()
         {
@@ -55,26 +52,15 @@ namespace ConsoleApp1
         }
         public void VerifyLogin()
         {
-            foreach(string c in UsuariosID)
+            foreach (Persona c in Base)
             {
-                if (c == usuario)
+                if(c.UsuarioID== usuario && c.Contrasena== contraseña)
                 {
-                    foreach (string c1 in Contras)
-                    {
-                        if (c1 == contraseña)
-                        {
-                            Console.WriteLine("Bienvenido " + usuario);
-                            break;
-                        }
-                        else { Console.Write("Contraseña Incorrecta"); }
-                    }
+                    Console.Write("Bienvenido " + c.Nombre);
                 }
-                else
-                {
-                    Console.Write("Usuario Incorrecto");
-                }
+                else { Console.Write("Acceso denegado"); }
             }
-            Console.ReadKey(); 
+            Console.ReadKey();
         }
 
     }
