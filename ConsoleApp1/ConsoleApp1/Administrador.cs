@@ -10,7 +10,7 @@ namespace ConsoleApp1
         {
             string NombreAdmin, MailAdmin, Tipo;
 
-            public Administrador(string nombre, string mail, string tipo, string uId, string contra) : base(uId, contra)
+            public Administrador(string nombre, string mail, string tipo, string uId, string contra,string logins) : base(uId, contra,logins)
             {
                 NombreAdmin = nombre;
                 MailAdmin = mail;

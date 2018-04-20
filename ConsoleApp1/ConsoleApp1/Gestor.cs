@@ -3,15 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ConsoleApp1
 {
     public class Gestor
     {
-        string usuario, contraseña,d;
-        List<string> Reserva = new List<string>();
-        List<string> CantCanchas = new List<string>();
-        List<string> CantSalas = new List<string>();
+        string usuario, contraseña;
         public List<Persona> Base = new List<Persona>();
 
         public Gestor()
@@ -35,7 +33,7 @@ namespace ConsoleApp1
             uId = (Console.ReadLine());
             Console.WriteLine("Ingrese su CONTRASEÑA:   \n");
             contra = (Console.ReadLine());
-            Persona p1 = new Persona(nom, mail, car, num, ocu, uId, contra);
+            Persona p1 = new Persona(nom, mail, car, num, ocu, uId, contra,"si");
             Base.Add(p1);
          
         }
@@ -62,16 +60,17 @@ namespace ConsoleApp1
                 }
                 else
                 {
-                    Console.Write("Bienvenido " + c.Nombre);
+                    Console.Write("Bienvenido " + c.Nombre +"\n");
+                    c.LoginStatus = "si";
                     break;
                 }
             }
             int c2 = Base.Count;
             if (contador1>=c2)
             {
-                Console.Write("Acceso Denegado");
+                Console.Write("Acceso Denegado \n");
+                Console.ReadKey();
             }
-            Console.ReadKey();
             
         }
 
