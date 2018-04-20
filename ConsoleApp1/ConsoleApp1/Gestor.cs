@@ -12,7 +12,8 @@ namespace ConsoleApp1
         string usuario, contraseña;
         public List<Persona> Base = new List<Persona>();
         public List<Reserva> ListaReserva = new List<Reserva>();
-        public List<Reserva> ReservasApro = new List<Reserva>();
+        public List<Reserva> ReservasApro1 = new List<Reserva>(); //canchas
+        public List<Reserva> ReservasApro2 = new List<Reserva>(); //estudio
 
         public Gestor()
         {
@@ -102,9 +103,11 @@ namespace ConsoleApp1
 
         public void addRes(Persona yo)
         {
-            string tipo,dia,horaini,horafin,usuario1;
-            Console.WriteLine("Ingrese tipo de espacio a reservar Estudios o Cancha:   \n");
+            string tipo,numero,dia,horaini,horafin,usuario1;
+            Console.WriteLine("Ingrese tipo de espacio a reservar Estudio o Cancha:   \n");
             tipo= (Console.ReadLine());
+            Console.WriteLine("Ingrese el número de el espacio a reservar Salas de estudio(1-40) y canchas(1-2)");
+            numero = (Console.ReadLine());
             Console.WriteLine("Ingrese el dia a reservar:   \n");
             dia = (Console.ReadLine());
             Console.WriteLine("Ingrese hora inicio:   \n");
@@ -112,35 +115,94 @@ namespace ConsoleApp1
             Console.WriteLine("Ingrese su hora de fin:   \n");
             horafin = (Console.ReadLine());
             usuario1 = yo.Nombre;
-            
-            Reserva res1 = new Reserva(tipo,dia,horaini,horafin,usuario1);
-            ListaReserva.Add(res1);
+            Console.Write("\n");
+            Reserva res1 = new Reserva(tipo, numero, dia, horaini, horafin, usuario1);
             VerifyRes(res1);
+            
         }
         public void VerifyRes(Reserva reserva)
-        {
-            int contador2 = 0;
-            foreach(Reserva r in ListaReserva)
+        { 
+            if (reserva.Tipo == "Cancha")
             {
-                if (reserva.Tipo== r.Tipo && reserva.Dia == r.Dia&& reserva.HoraInicio == r.HoraInicio)
+                int contador2 = 0;
+                foreach (Reserva r in ReservasApro1)
                 {
-                    contador2 = contador2 + 1;
-                    continue;
+                    if (r.Numero != reserva.Numero && r.HoraInicio != reserva.HoraInicio && r.HoraFin != reserva.HoraFin)
+                    {
+                        contador2 = 1;
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        contador2 = 0;
+                        continue;
+                    }
                 }
-                else
+                if (contador2 == 1)
                 {
-                    ReservasApro.Add(reserva);
-                    Console.Clear();
-                    Console.WriteLine("Reserva hecha para un espacio de tipo "+reserva.Tipo+ " el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin+"\n");
+                    ReservasApro1.Add(reserva);
+                    Console.WriteLine("Reserva hecha para un espacio de tipo " + reserva.Tipo + " " + reserva.Numero + "el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin + ". \n");
+                }
+                else { Console.WriteLine("No hay espacios disponibles para su requerimiento. \n "); }
+            }
+            if (reserva.Tipo == "Estudio")
+            {
+                int contador2 = 0;
+                foreach (Reserva a in ReservasApro2)
+                {
+                    if (a.Numero != reserva.Numero && a.HoraInicio != reserva.HoraInicio && a.HoraFin != reserva.HoraFin)
+                    {
+                        contador2 = 1;
+                        Console.Clear();
+                        break;
+                    }
+                    else
+                    {
+                        contador2 = 0;
+                        continue;
+                    }
+                }
+                if (contador2==1)
+                {
+                    ReservasApro2.Add(reserva);
+                    Console.WriteLine("Reserva hecha para un espacio de tipo " + reserva.Tipo + " " + reserva.Numero + "el día " + reserva.Dia + " con hora de inicio " + reserva.HoraInicio + " y hora de fin " + reserva.HoraFin + "\n");
+                }
+                else { Console.WriteLine("No hay espacios disponibles para su requerimiento. \n "); }
+            }
+        }
+
+        public void Mostrar()
+        {
+            string espacio,num;
+            Console.WriteLine("Ingrese su espacio a buscar: \n");
+            espacio = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("Ingrese el número de espacio a buscar (Estudio=1-40 y Cancha= 1-2) ");
+            num = Convert.ToString(Console.ReadLine());
+
+            if (espacio == "Cancha")
+            {
+                foreach (Reserva res in ReservasApro1)
+                {
+                    if ( num == res.Numero)
+                    {
+                        Console.WriteLine("- " + res.Tipo + " = " + res.Numero + ". Dia: " + res.Dia + ". Hora Inicio: " + res.HoraInicio + ". Hora Fin: " + res.HoraFin +"\n");
+                    }
 
                 }
             }
-            int c3 = ListaReserva.Count;
-            if(contador2>= c3)
+
+            if (espacio== "Estudio")
             {
-                Console.Write("No hay reservas disponibles con su requerimiento. \n");
+                foreach(Reserva res in ReservasApro2)
+                {
+                    if (num == res.Numero)
+                    {
+                        Console.Write("- " + res.Tipo + " = " + res.Numero + ". Dia: " + res.Dia + ". Hora Inicio: " + res.HoraInicio + ". Hora Fin: " + res.HoraFin +"\n");
+                    }
+                }
             }
-           
+
         }
     }
 }
