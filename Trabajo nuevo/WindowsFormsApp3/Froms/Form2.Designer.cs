@@ -37,7 +37,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtClave = new System.Windows.Forms.TextBox();
             this.txtMail = new System.Windows.Forms.TextBox();
-            this.txtOcupacion = new System.Windows.Forms.TextBox();
             this.txtCarrera = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -45,6 +44,7 @@
             this.txtRUT = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtFono = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label1
@@ -54,7 +54,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(264, 32);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Sign in";
+            this.label1.Text = "Sign up";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
@@ -121,6 +121,7 @@
             this.txtClave.Name = "txtClave";
             this.txtClave.Size = new System.Drawing.Size(400, 20);
             this.txtClave.TabIndex = 7;
+            this.txtClave.UseSystemPasswordChar = true;
             // 
             // txtMail
             // 
@@ -128,13 +129,6 @@
             this.txtMail.Name = "txtMail";
             this.txtMail.Size = new System.Drawing.Size(400, 20);
             this.txtMail.TabIndex = 8;
-            // 
-            // txtOcupacion
-            // 
-            this.txtOcupacion.Location = new System.Drawing.Point(156, 190);
-            this.txtOcupacion.Name = "txtOcupacion";
-            this.txtOcupacion.Size = new System.Drawing.Size(400, 20);
-            this.txtOcupacion.TabIndex = 9;
             // 
             // txtCarrera
             // 
@@ -156,7 +150,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(84, 303);
+            this.button2.Location = new System.Drawing.Point(12, 9);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 12;
@@ -180,6 +174,7 @@
             this.txtRUT.Name = "txtRUT";
             this.txtRUT.Size = new System.Drawing.Size(400, 20);
             this.txtRUT.TabIndex = 14;
+            this.txtRUT.TextChanged += new System.EventHandler(this.txtRUT_TextChanged);
             // 
             // label8
             // 
@@ -198,11 +193,21 @@
             this.txtFono.Size = new System.Drawing.Size(400, 20);
             this.txtFono.TabIndex = 16;
             // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(156, 193);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(400, 21);
+            this.comboBox1.TabIndex = 17;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(636, 349);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.txtFono);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtRUT);
@@ -210,7 +215,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtCarrera);
-            this.Controls.Add(this.txtOcupacion);
             this.Controls.Add(this.txtMail);
             this.Controls.Add(this.txtClave);
             this.Controls.Add(this.label6);
@@ -238,7 +242,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtClave;
         private System.Windows.Forms.TextBox txtMail;
-        private System.Windows.Forms.TextBox txtOcupacion;
         private System.Windows.Forms.TextBox txtCarrera;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
@@ -246,5 +249,6 @@
         private System.Windows.Forms.TextBox txtRUT;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtFono;
+        private System.Windows.Forms.ComboBox comboBox1;
     }
 }

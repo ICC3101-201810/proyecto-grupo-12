@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp3
 {
+    [Serializable]
     class Persona : Usuario
     {
-        string nombre, mail, carrera, numero, ocupacion;
+        public string nombre, mail, carrera, numero;
+        public enum Ocupacion { Administrador, Usuario };
+        public Ocupacion ocupacion;
+        public List<Persona> usuariosP { get; set; }
 
-        public Persona(string nombre, string mail, string carrera, string numero, string ocupacion, string uId, string contra, bool logedin) : base(uId, contra, logedin)
+        public Persona(string nombre, string mail, string carrera, string numero, Ocupacion ocupacion, string uId, string contra, bool logedin) : base(uId, contra, logedin)
         {
             this.nombre = nombre;
             this.mail = mail;
@@ -18,24 +22,49 @@ namespace WindowsFormsApp3
             this.numero = numero;
             this.ocupacion = ocupacion;
         }
-        
-        public List<Persona> usuariosP = new List<Persona>();
 
-        public bool AgregarUsuarioP (Persona p)
+        public void AgregarUsuarioP (Persona p)
         {
             usuariosP.Add(p);
-            return true;
+            
         }
 
-        public bool LogIn (string nom, string pass)
+        public void LogIn (Persona usu)
+        {
+            if (usuariosP == null)
+            {
+
+            }
+            else
+            {
+                foreach (Persona p in usuariosP)
+                {
+                    if (usu.nombre == p.nombre)
+                    {
+                        if (usu.contra == p.contra)
+                        {
+                            p.logedin = true;
+                            usu = p;
+                        }
+                    }
+                }
+            }
+        }
+
+        public void LogOut()
         {
             foreach (Persona p in usuariosP)
             {
-                if ()
+                if (p.logedin == true)
                 {
-
+                    p.logedin = false;
                 }
             }
+        }
+
+        public List<Persona> GetListaUsuarios()
+        {
+            return usuariosP;
         }
     }
 }
