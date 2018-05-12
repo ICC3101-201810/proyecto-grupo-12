@@ -32,11 +32,11 @@ namespace WindowsFormsApp3
             
         }
 
-        public void LogIn (Persona usu, List<Persona> ps)
+        public bool LogIn (Persona usu, List<Persona> ps)
         {
             if (ps == null)
             {
-
+                return false;
             }
             else
             {
@@ -48,9 +48,11 @@ namespace WindowsFormsApp3
                         {
                             p.logedin = true;
                             usu = p;
+                            return true;
                         }
                     }
                 }
+                return false;
             }
         }
 

@@ -12,7 +12,7 @@ namespace WindowsFormsApp3
 {
     public partial class Form2 : Form
     {
-        List<Persona> usuariosP;
+        List<Persona> usuariosP = new List<Persona>();
 
         public Form2()
         {

@@ -12,7 +12,7 @@ namespace WindowsFormsApp3.Froms
 {
     public partial class Form3 : Form
     {
-        List<Persona> usuariosP;
+        List<Persona> usuariosP = new List<Persona>();
 
         public Form3()
         {
@@ -43,8 +43,8 @@ namespace WindowsFormsApp3.Froms
         private void opcionesAdministradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Persona a = new Persona("", "", "", "", Persona.Ocupacion.Administrador, "", "", false);
-            List<Persona> b = a.GetListaUsuarios();
-            foreach (Persona per in b)
+            usuariosP = a.GetListaUsuarios();
+            foreach (Persona per in usuariosP)
             {
                 if (per.logedin == true)
                 {
