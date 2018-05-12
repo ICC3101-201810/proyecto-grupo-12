@@ -19,7 +19,7 @@ namespace WindowsFormsApp3
             InitializeComponent();
             comboBox1.Items.Add(Persona.Ocupacion.Administrador);
             comboBox1.Items.Add(Persona.Ocupacion.Usuario);
-            usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
+            (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).ListasUsuarios(usuariosP);
         }
 
         public void ListasUsuarios(List<Persona> ps)
