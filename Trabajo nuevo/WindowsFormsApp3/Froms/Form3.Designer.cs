@@ -34,6 +34,7 @@
             this.ajustesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.opcionesAdministradorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verUsuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reservarCanchaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -52,10 +53,13 @@
             // 
             // mENUToolStripMenuItem
             // 
+            this.mENUToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reservarCanchaToolStripMenuItem});
             this.mENUToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 14F);
             this.mENUToolStripMenuItem.Name = "mENUToolStripMenuItem";
             this.mENUToolStripMenuItem.Size = new System.Drawing.Size(78, 29);
             this.mENUToolStripMenuItem.Text = "MENU";
+            this.mENUToolStripMenuItem.Click += new System.EventHandler(this.mENUToolStripMenuItem_Click);
             // 
             // logOutToolStripMenuItem
             // 
@@ -79,15 +83,21 @@
             this.opcionesAdministradorToolStripMenuItem.Name = "opcionesAdministradorToolStripMenuItem";
             this.opcionesAdministradorToolStripMenuItem.Size = new System.Drawing.Size(148, 29);
             this.opcionesAdministradorToolStripMenuItem.Text = "Opciones Administrador";
-            this.opcionesAdministradorToolStripMenuItem.Visible = false;
             this.opcionesAdministradorToolStripMenuItem.Click += new System.EventHandler(this.opcionesAdministradorToolStripMenuItem_Click);
             // 
             // verUsuariosToolStripMenuItem
             // 
             this.verUsuariosToolStripMenuItem.Name = "verUsuariosToolStripMenuItem";
-            this.verUsuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.verUsuariosToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.verUsuariosToolStripMenuItem.Text = "Ver Usuarios";
             this.verUsuariosToolStripMenuItem.Click += new System.EventHandler(this.verUsuariosToolStripMenuItem_Click);
+            // 
+            // reservarCanchaToolStripMenuItem
+            // 
+            this.reservarCanchaToolStripMenuItem.Name = "reservarCanchaToolStripMenuItem";
+            this.reservarCanchaToolStripMenuItem.Size = new System.Drawing.Size(223, 30);
+            this.reservarCanchaToolStripMenuItem.Text = "Reservar Cancha";
+            this.reservarCanchaToolStripMenuItem.Click += new System.EventHandler(this.reservarCanchaToolStripMenuItem_Click);
             // 
             // Form3
             // 
@@ -112,5 +122,6 @@
         private System.Windows.Forms.ToolStripMenuItem ajustesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem opcionesAdministradorToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verUsuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reservarCanchaToolStripMenuItem;
     }
 }

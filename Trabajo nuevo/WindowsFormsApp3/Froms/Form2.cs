@@ -7,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using System.Xml.Serialization;
+
 
 namespace WindowsFormsApp3
 {
     public partial class Form2 : Form
     {
         List<Persona> usuariosP = new List<Persona>();
+        Persona p;
 
         public Form2()
         {
@@ -106,6 +110,11 @@ namespace WindowsFormsApp3
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Administrador, userRUT, userClave, false);
                     usuariosP.Add(a);
                     a.ListasUsuarios(usuariosP);
+
+                    XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
+                    FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
+                    serializador.Serialize(archivo, usuariosP);
+                    archivo.Close();
                 }
 
                 else
@@ -113,6 +122,11 @@ namespace WindowsFormsApp3
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Usuario, userRUT, userClave, false);
                     usuariosP.Add(a);
                     a.ListasUsuarios(usuariosP);
+
+                    XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
+                    FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
+                    serializador.Serialize(archivo, usuariosP);
+                    archivo.Close();
                 }
 
             }
@@ -121,8 +135,6 @@ namespace WindowsFormsApp3
             {
                 errorProvider5.SetError(comboBox1, "Debe ingresar una ocupacion");
             }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WindowsFormsApp3.Froms
 {
@@ -18,6 +20,10 @@ namespace WindowsFormsApp3.Froms
         {
             InitializeComponent();
             usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
+            XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
+            FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
+            serializador.Serialize(archivo, usuariosP);
+            archivo.Close();
 
         }
 
@@ -62,6 +68,18 @@ namespace WindowsFormsApp3.Froms
             p.GetListaUsuarios();
             Froms.Form4 openform4 = new Froms.Form4();
             openform4.Show();
+            Visible = false;
+        }
+
+        private void mENUToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void reservarCanchaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form5 openform5 = new Form5();
+            openform5.Show();
             Visible = false;
         }
     }

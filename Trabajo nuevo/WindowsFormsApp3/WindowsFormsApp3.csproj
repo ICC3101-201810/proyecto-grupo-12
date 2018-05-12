@@ -50,6 +50,7 @@
       <Link>Froms\Form1_copiaSeuridad.cs</Link>
     </Compile>
     <Compile Include="Clases\Canchas.cs" />
+    <Compile Include="Froms\Controller.cs" />
     <Compile Include="Froms\Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +71,13 @@
     <Compile Include="Froms\Form4.Designer.cs">
       <DependentUpon>Form4.cs</DependentUpon>
     </Compile>
+    <Compile Include="Froms\Form5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\Form5.Designer.cs">
+      <DependentUpon>Form5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\onAgregarReserva.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Clases\Reserva.cs" />
@@ -87,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Form4.resx">
       <DependentUpon>Form4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Form5.resx">
+      <DependentUpon>Form5.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

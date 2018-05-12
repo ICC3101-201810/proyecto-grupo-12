@@ -7,14 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WindowsFormsApp3.Froms
 {
     public partial class Form4 : Form
     {
+        List<Persona> usuariosP;
+        Persona p;
+
         public Form4()
         {
             InitializeComponent();
+            usuariosP = p.GetListaUsuarios();
+            XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
+            FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
+            serializador.Serialize(archivo, usuariosP);
+            archivo.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,10 +50,19 @@ namespace WindowsFormsApp3.Froms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            this.dataGridView1.Rows.Add("1", "2");
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
