@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+
 
 namespace WindowsFormsApp3
 {
     [Serializable]
-    class Persona : Usuario
+    public class Persona : Usuario
     {
         public string nombre, mail, carrera, numero;
         public enum Ocupacion { Administrador, Usuario };
@@ -23,21 +25,22 @@ namespace WindowsFormsApp3
             this.ocupacion = ocupacion;
         }
 
-        public void AgregarUsuarioP (Persona p)
+        public void AgregarUsuarioP (Persona p, List<Persona> ps)
         {
+            ps.Add(p);
             usuariosP.Add(p);
             
         }
 
-        public void LogIn (Persona usu)
+        public void LogIn (Persona usu, List<Persona> ps)
         {
-            if (usuariosP == null)
+            if (ps == null)
             {
 
             }
             else
             {
-                foreach (Persona p in usuariosP)
+                foreach (Persona p in ps)
                 {
                     if (usu.nombre == p.nombre)
                     {
@@ -51,9 +54,9 @@ namespace WindowsFormsApp3
             }
         }
 
-        public void LogOut()
+        public void LogOut(List<Persona> ps)
         {
-            foreach (Persona p in usuariosP)
+            foreach (Persona p in ps)
             {
                 if (p.logedin == true)
                 {
@@ -62,9 +65,26 @@ namespace WindowsFormsApp3
             }
         }
 
+        public void ListasUsuarios(List<Persona> ps)
+        {
+            usuariosP = ps;
+        }
+
         public List<Persona> GetListaUsuarios()
         {
             return usuariosP;
+        }
+
+        public Persona GetPersona(string uId, List<Persona> p)
+        {
+            foreach (Persona per in p)
+            {
+                if (per.uId == uId)
+                {
+                    return per;
+                }
+            }
+            return null;
         }
     }
 }

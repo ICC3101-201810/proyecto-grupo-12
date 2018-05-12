@@ -12,9 +12,13 @@ namespace WindowsFormsApp3.Froms
 {
     public partial class Form3 : Form
     {
+        List<Persona> usuariosP;
+
         public Form3()
         {
             InitializeComponent();
+            usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
+
         }
 
         private void listaUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -30,7 +34,7 @@ namespace WindowsFormsApp3.Froms
         private void ajustesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Persona p = new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", true);
-            p.LogOut();
+            p.LogOut(usuariosP);
             Form1 openform1 = new Form1();
             openform1.Show();
             Visible = false;

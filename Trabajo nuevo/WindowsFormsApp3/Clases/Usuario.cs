@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp3
 {
-    class Usuario
+    public class Usuario
     {
         public string uId, contra;
         public bool logedin;

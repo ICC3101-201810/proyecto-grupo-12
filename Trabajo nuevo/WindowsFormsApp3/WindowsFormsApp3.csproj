@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="..\..\..\Universidad\Form1_copiaSeuridad.cs">
       <SubType>Form</SubType>
+      <Link>Froms\Form1_copiaSeuridad.cs</Link>
     </Compile>
     <Compile Include="Clases\Canchas.cs" />
     <Compile Include="Froms\Form2.cs">
@@ -76,6 +77,7 @@
     <Compile Include="Clases\Usuario.cs" />
     <EmbeddedResource Include="..\..\..\Universidad\Form1_copiaSeuridad.resx">
       <DependentUpon>Form1_copiaSeuridad.cs</DependentUpon>
+      <Link>Froms\Form1_copiaSeuridad.resx</Link>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>

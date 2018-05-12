@@ -12,11 +12,24 @@ namespace WindowsFormsApp3
 {
     public partial class Form2 : Form
     {
+        List<Persona> usuariosP;
+
         public Form2()
         {
             InitializeComponent();
             comboBox1.Items.Add(Persona.Ocupacion.Administrador);
             comboBox1.Items.Add(Persona.Ocupacion.Usuario);
+            usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
+        }
+
+        public void ListasUsuarios(List<Persona> ps)
+        {
+            ps = usuariosP;
+        }
+
+        public List<Persona> GetListaUsuarios()
+        {
+            return usuariosP;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -33,28 +46,83 @@ namespace WindowsFormsApp3
             string userRUT = txtRUT.Text;
             string userFono = txtFono.Text;
 
+            if (txtNombre.Text == "")
+            {
+                errorProvider1.SetError(txtNombre,"Debe ingresar su nombre");
+            }
+            else
+            {
+                errorProvider1.Clear();
+            }
+            if (txtRUT.Text == "")
+            {
+                errorProvider2.SetError(txtRUT, "Debe ingresar un RUT valido");
+            }
+            else
+            {
+                errorProvider2.Clear();
+            }
+            if (txtClave.Text == "")
+            {
+                errorProvider3.SetError(txtClave, "ingrese una contraseña valida (Mayor a un caracter)");
+            }
+            else
+            {
+                errorProvider3.Clear();
+            }
+            if (txtMail.Text == "")
+            {
+                errorProvider4.SetError(txtMail,"Ingrese un mail valido");
+            }
+            else
+            {
+                errorProvider4.Clear();
+            }
+            if (txtCarrera.Text == "")
+            {
+                errorProvider6.SetError(txtCarrera, "Ingrese su la carrera que esta cursando");
+            }
+            else
+            {
+                errorProvider6.Clear();
+            }
+            if (txtFono.Text == "")
+            {
+                errorProvider7.SetError(txtFono, "Ingrese su numero de contacto");
+            }
+            else
+            {
+                errorProvider7.Clear();
+            }
+
+
             if (comboBox1.SelectedItem != null)
             {
                 string getOcupacion = comboBox1.SelectedItem.ToString();
+                errorProvider5.Clear();
 
                 if (getOcupacion == (Persona.Ocupacion.Administrador).ToString())
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Administrador, userRUT, userClave, false);
-                    a.AgregarUsuarioP(a);
+                    usuariosP.Add(a);
+                    a.ListasUsuarios(usuariosP);
                 }
 
                 else
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Usuario, userRUT, userClave, false);
-                    a.AgregarUsuarioP(a);
+                    usuariosP.Add(a);
+                    a.ListasUsuarios(usuariosP);
                 }
 
             }
 
             else
             {
-                MessageBox.Show("Debe dejar claro cual es su ocupacion", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                errorProvider5.SetError(comboBox1, "Debe ingresar una ocupacion");
             }
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)

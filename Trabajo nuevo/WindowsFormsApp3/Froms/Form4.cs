@@ -30,8 +30,12 @@ namespace WindowsFormsApp3.Froms
             List<Persona> list = p.GetListaUsuarios();
             foreach (Persona per in list)
             {
-                comboBox1.Items.Add(per.ocupacion + " - " + per.nombre + " - " + per.carrera + " - " + per.uId + " - " + per.numero);
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
