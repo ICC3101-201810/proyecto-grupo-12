@@ -110,23 +110,12 @@ namespace WindowsFormsApp3
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Administrador, userRUT, userClave, false);
                     usuariosP.Add(a);
                     a.ListasUsuarios(usuariosP);
-
-                    XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
-                    FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
-                    serializador.Serialize(archivo, usuariosP);
-                    archivo.Close();
                 }
-
                 else
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Usuario, userRUT, userClave, false);
                     usuariosP.Add(a);
                     a.ListasUsuarios(usuariosP);
-
-                    XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
-                    FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
-                    serializador.Serialize(archivo, usuariosP);
-                    archivo.Close();
                 }
 
             }

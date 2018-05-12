@@ -21,10 +21,6 @@ namespace WindowsFormsApp3.Froms
         {
             InitializeComponent();
             usuariosP = p.GetListaUsuarios();
-            XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
-            FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
-            serializador.Serialize(archivo, usuariosP);
-            archivo.Close();
         }
 
         private void button2_Click(object sender, EventArgs e)

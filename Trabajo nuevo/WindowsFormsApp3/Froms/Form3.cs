@@ -20,11 +20,6 @@ namespace WindowsFormsApp3.Froms
         {
             InitializeComponent();
             usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
-            XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
-            FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
-            serializador.Serialize(archivo, usuariosP);
-            archivo.Close();
-
         }
 
         private void listaUsuariosToolStripMenuItem_Click(object sender, EventArgs e)

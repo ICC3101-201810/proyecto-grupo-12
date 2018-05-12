@@ -71,10 +71,6 @@ namespace WindowsFormsApp3
         public void ListasUsuarios(List<Persona> ps)
         {
             usuariosP = ps;
-            XmlSerializer serializador = new XmlSerializer(usuariosP.GetType());
-            FileStream archivo = new FileStream("Usuarios.xml", FileMode.Create, FileAccess.ReadWrite);
-            serializador.Serialize(archivo, usuariosP);
-            archivo.Close();
         }
 
         public List<Persona> GetListaUsuarios()
