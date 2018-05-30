@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace WindowsFormsApp3.Froms
@@ -15,11 +15,29 @@ namespace WindowsFormsApp3.Froms
     public partial class Form3 : Form
     {
         List<Persona> usuariosP = new List<Persona>();
+        Persona p;
 
         public Form3()
         {
             InitializeComponent();
-            usuariosP = (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).GetListaUsuarios();
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+            usuariosP = (List<Persona>)formatter.Deserialize(miStream);
+            miStream.Close();
+            foreach (Persona p in usuariosP)
+            {
+                if(p.logedin == true)
+                {
+                    if (p.ocupacion == Persona.Ocupacion.Administrador)
+                    {
+                        opcionesAdministradorToolStripMenuItem.Visible = true;
+                    }
+                    else
+                    {
+                        opcionesAdministradorToolStripMenuItem.Visible = false;
+                    }
+                }
+            }
         }
 
         private void listaUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -35,7 +53,7 @@ namespace WindowsFormsApp3.Froms
         private void ajustesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Persona p = new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", true);
-            p.LogOut(usuariosP);
+            Controller.LogOut(usuariosP);
             Form1 openform1 = new Form1();
             openform1.Show();
             Visible = false;
@@ -43,24 +61,10 @@ namespace WindowsFormsApp3.Froms
 
         private void opcionesAdministradorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persona a = new Persona("", "", "", "", Persona.Ocupacion.Administrador, "", "", false);
-            usuariosP = a.GetListaUsuarios();
-            foreach (Persona per in usuariosP)
-            {
-                if (per.logedin == true)
-                {
-                    if (per.ocupacion == Persona.Ocupacion.Administrador)
-                    {
-                        opcionesAdministradorToolStripMenuItem.Visible = true;
-                    }
-                }
-            }
         }
 
         private void verUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Persona p = new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false);
-            p.GetListaUsuarios();
             Froms.Form4 openform4 = new Froms.Form4();
             openform4.Show();
             Visible = false;
@@ -73,8 +77,8 @@ namespace WindowsFormsApp3.Froms
 
         private void reservarCanchaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form5 openform5 = new Form5();
-            openform5.Show();
+            Form6 openform6 = new Form6();
+            openform6.Show();
             Visible = false;
         }
     }

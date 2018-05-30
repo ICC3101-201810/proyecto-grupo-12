@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 namespace WindowsFormsApp3.Froms
@@ -20,7 +20,14 @@ namespace WindowsFormsApp3.Froms
         public Form4()
         {
             InitializeComponent();
-            usuariosP = p.GetListaUsuarios();
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+            usuariosP = (List<Persona>)formatter.Deserialize(miStream);
+            miStream.Close();
+            foreach (Persona p in usuariosP)
+            {
+                dataGridView1.Rows.Add(p.nombre, p.mail, p.uId, p.ocupacion);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,11 +39,7 @@ namespace WindowsFormsApp3.Froms
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Persona p = new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false);
-            List<Persona> list = p.GetListaUsuarios();
-            foreach (Persona per in list)
-            {
-            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -46,7 +49,7 @@ namespace WindowsFormsApp3.Froms
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.dataGridView1.Rows.Add("1", "2");
+
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
@@ -56,6 +59,7 @@ namespace WindowsFormsApp3.Froms
 
         private void button3_Click(object sender, EventArgs e)
         {
+
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

@@ -207,6 +207,7 @@
             this.txtFono.Name = "txtFono";
             this.txtFono.Size = new System.Drawing.Size(400, 20);
             this.txtFono.TabIndex = 16;
+            this.txtFono.TextChanged += new System.EventHandler(this.txtFono_TextChanged);
             // 
             // comboBox1
             // 

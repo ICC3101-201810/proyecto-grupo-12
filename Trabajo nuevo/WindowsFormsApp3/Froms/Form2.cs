@@ -8,22 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
-using System.Xml.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace WindowsFormsApp3
 {
     public partial class Form2 : Form
     {
-        List<Persona> usuariosP = new List<Persona>();
+        List<Persona> usuariosP;
         Persona p;
-
-        public Form2()
+        Form1 parent;
+        public Form2(Form1 parent)
         {
+            this.parent = parent;
             InitializeComponent();
             comboBox1.Items.Add(Persona.Ocupacion.Administrador);
             comboBox1.Items.Add(Persona.Ocupacion.Usuario);
-            (new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", false)).ListasUsuarios(usuariosP);
+            usuariosP = new List<Persona>();
         }
 
         public void ListasUsuarios(List<Persona> ps)
@@ -49,6 +50,9 @@ namespace WindowsFormsApp3
             string userClave = txtClave.Text;
             string userRUT = txtRUT.Text;
             string userFono = txtFono.Text;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt",FileMode.Create,FileAccess.Write, FileShare.None);
 
             if (txtNombre.Text == "")
             {
@@ -109,13 +113,15 @@ namespace WindowsFormsApp3
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Administrador, userRUT, userClave, false);
                     usuariosP.Add(a);
-                    a.ListasUsuarios(usuariosP);
+                    formatter.Serialize(miStream, usuariosP);
+                    miStream.Close();
                 }
                 else
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Usuario, userRUT, userClave, false);
                     usuariosP.Add(a);
-                    a.ListasUsuarios(usuariosP);
+                    formatter.Serialize(miStream, usuariosP);
+                    miStream.Close();
                 }
 
             }
@@ -128,19 +134,35 @@ namespace WindowsFormsApp3
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form1 openform1 = new Form1();
-            openform1.Show();
-            Visible = false;
+            this.Close();
         }
 
         private void txtRUT_TextChanged(object sender, EventArgs e)
         {
-            int id = Int32.Parse(txtRUT.Text);
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtRUT.Text, "[^0-9]"))
+            {
+                errorProvider2.SetError(txtRUT ,"Porfavor ingresar solo numeros");
+                txtRUT.Text = txtRUT.Text.Remove(txtRUT.Text.Length - 1);
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtFono_TextChanged(object sender, EventArgs e)
+        {
+            if (System.Text.RegularExpressions.Regex.IsMatch(txtFono.Text, "[^0-9]"))
+            {
+                errorProvider7.SetError(txtFono , "Porfavor ingresar solo numeros");
+                txtFono.Text = txtFono.Text.Remove(txtFono.Text.Length - 1);
+            }
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            parent.Show();
+            base.OnClosed(e);
         }
     }
 }

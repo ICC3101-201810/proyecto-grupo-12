@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApp3
 {
-    class Reserva
+    public class Reserva
     {
         public string Espacio { get; set; }
         public string Dia { get; set; }// 26/04 ej de fecha

@@ -1,19 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp3.Froms
+namespace WindowsFormsApp3
 {
-    class Controller
+    public static class Controller
     {
-        public List<Reserva> ReservasCancha;
-        public List<Reserva> ReservasEstudio;
-        Form5 Reservas1;
+        
+        private static List<Reserva> ReservasCancha;
+        private static List<Reserva> ReservasEstudio;
+        private static List<Persona> usuarios;
+        private static Persona current;
 
-        public Controller(Form5 Reservas1)
+
+        public static void Init()
+        {
+            ReservasCancha = new List<Reserva>();
+            ReservasEstudio = new List<Reserva>();
+            usuarios = new List<Persona>();
+            Deserializar();
+        }
+        public static List<Reserva> GetReservasCancha()
+        {
+            return ReservasCancha;
+        }
+
+        public static List<Reserva> GetReservasEstudio()
+        {
+            return ReservasEstudio;
+        }
+
+        public static List<Persona> GetUsuarios()
+        {
+            return usuarios;
+        }
+
+        public static void AddPersona(Persona u)
+        {
+            usuarios.Add(u);
+        }
+        public static void Serializar()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter.Serialize(miStream, usuarios);
+            miStream.Close();
+        }
+        private static void Deserializar()
+        {
+            if (File.Exists("datosUsuarios.txt"))
+            {
+                BinaryFormatter formatter = new BinaryFormatter();
+                Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+                usuarios = (List<Persona>)formatter.Deserialize(miStream);
+                miStream.Close();
+            }
+        }
+        public static bool LogIn(Persona usu)
+        {
+            if (usuarios == null)
+            {
+                return false;
+            }
+            else
+            {
+                foreach (Persona p in usuarios)
+                {
+                    if (usu.nombre == p.nombre)
+                    {
+                        if (usu.contra == p.contra)
+                        {
+                            p.logedin = true;
+                            usu = p;
+                            current = p;
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+
+        public static void LogOut(List<Persona> ps)
+        {
+            foreach (Persona p in ps)
+            {
+                if (p.logedin == true)
+                {
+                    p.logedin = false;
+                }
+            }
+        }
+
+        public static Persona ReturnCurrent()
+        {
+            return current;
+        } 
+
+        /*
+        Form6 Reservas1;
+        
+        public Controller(Form6 Reservas1)
         {
             ReservasCancha = new List<Reserva>();
             ReservasEstudio = new List<Reserva>();
@@ -64,6 +156,6 @@ namespace WindowsFormsApp3.Froms
                 }
             }
         }
-
+        */
     }
 }
