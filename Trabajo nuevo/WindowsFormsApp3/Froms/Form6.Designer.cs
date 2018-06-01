@@ -1,4 +1,6 @@
-﻿namespace WindowsFormsApp3.Froms
+﻿using System;
+
+namespace WindowsFormsApp3.Froms
 {
     partial class Form6
     {
@@ -49,7 +51,6 @@
             this.button2.TabIndex = 24;
             this.button2.Text = "<----";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // cbNumero
             // 
@@ -79,6 +80,7 @@
             this.BtnASalas.TabIndex = 21;
             this.BtnASalas.Text = "Reservar";
             this.BtnASalas.UseVisualStyleBackColor = true;
+            this.BtnASalas.Click += new System.EventHandler(this.BtnASalas_Click);
             // 
             // cbHorario
             // 
@@ -151,6 +153,7 @@
             this.cbEspacio.Name = "cbEspacio";
             this.cbEspacio.Size = new System.Drawing.Size(141, 21);
             this.cbEspacio.TabIndex = 16;
+            this.cbEspacio.SelectedIndexChanged += new System.EventHandler(this.cbEspacio_SelectedIndexChanged);
             // 
             // label2
             // 
@@ -208,5 +211,7 @@
         private System.Windows.Forms.ComboBox cbEspacio;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+
+        public EventHandler button2_Click { get; private set; }
     }
 }
