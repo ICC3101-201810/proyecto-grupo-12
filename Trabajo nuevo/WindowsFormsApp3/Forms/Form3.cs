@@ -14,19 +14,29 @@ namespace WindowsFormsApp3.Froms
 {
     public partial class Form3 : Form
     {
-        Form1 parent;
+        List<Persona> usuariosP = new List<Persona>();
+        Persona p;
 
-        public Form3(Form1 parent)
+        public Form3()
         {
-            this.parent = parent;
             InitializeComponent();
-            if (Controller.ReturnCurrent().ocupacion == Persona.Ocupacion.Administrador)
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+            usuariosP = (List<Persona>)formatter.Deserialize(miStream);
+            miStream.Close();
+            foreach (Persona p in usuariosP)
             {
-                opcionesAdministradorToolStripMenuItem.Visible = true;
-            }
-            else
-            {
-                opcionesAdministradorToolStripMenuItem.Visible = false;
+                if(p.logedin == true)
+                {
+                    if (p.ocupacion == Persona.Ocupacion.Administrador)
+                    {
+                        opcionesAdministradorToolStripMenuItem.Visible = true;
+                    }
+                    else
+                    {
+                        opcionesAdministradorToolStripMenuItem.Visible = false;
+                    }
+                }
             }
         }
 
@@ -42,8 +52,11 @@ namespace WindowsFormsApp3.Froms
 
         private void ajustesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Controller.LogOut();
-            this.Close();
+            Persona p = new Persona("", "", "", "", Persona.Ocupacion.Usuario, "", "", true);
+            Controller.LogOut(usuariosP);
+            Form1 openform1 = new Form1();
+            openform1.Show();
+            Visible = false;
         }
 
         private void opcionesAdministradorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -52,7 +65,7 @@ namespace WindowsFormsApp3.Froms
 
         private void verUsuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Froms.Form4 openform4 = new Froms.Form4(this);
+            Froms.Form4 openform4 = new Froms.Form4();
             openform4.Show();
             Visible = false;
         }
@@ -64,15 +77,9 @@ namespace WindowsFormsApp3.Froms
 
         private void reservarCanchaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form6 openform6 = new Form6(this);
+            Form6 openform6 = new Form6();
             openform6.Show();
-            this.Hide();
-        }
-
-        protected override void OnClosed(EventArgs e)
-        {
-            parent.Show();
-            base.OnClosed(e);
+            Visible = false;
         }
     }
 }

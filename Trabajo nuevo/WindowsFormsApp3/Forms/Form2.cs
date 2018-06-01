@@ -15,6 +15,8 @@ namespace WindowsFormsApp3
 {
     public partial class Form2 : Form
     {
+        List<Persona> usuariosP;
+        Persona p;
         Form1 parent;
         public Form2(Form1 parent)
         {
@@ -22,6 +24,17 @@ namespace WindowsFormsApp3
             InitializeComponent();
             comboBox1.Items.Add(Persona.Ocupacion.Administrador);
             comboBox1.Items.Add(Persona.Ocupacion.Usuario);
+            usuariosP = new List<Persona>();
+        }
+
+        public void ListasUsuarios(List<Persona> ps)
+        {
+            ps = usuariosP;
+        }
+
+        public List<Persona> GetListaUsuarios()
+        {
+            return usuariosP;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -37,6 +50,9 @@ namespace WindowsFormsApp3
             string userClave = txtClave.Text;
             string userRUT = txtRUT.Text;
             string userFono = txtFono.Text;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt",FileMode.Create,FileAccess.Write, FileShare.None);
 
             if (txtNombre.Text == "")
             {
@@ -96,12 +112,16 @@ namespace WindowsFormsApp3
                 if (getOcupacion == (Persona.Ocupacion.Administrador).ToString())
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Administrador, userRUT, userClave, false);
-                    Controller.AddPersona(a);
+                    usuariosP.Add(a);
+                    formatter.Serialize(miStream, usuariosP);
+                    miStream.Close();
                 }
                 else
                 {
                     Persona a = new Persona(userName, userMail, userCarrera, userFono, Persona.Ocupacion.Usuario, userRUT, userClave, false);
-                    Controller.AddPersona(a);
+                    usuariosP.Add(a);
+                    formatter.Serialize(miStream, usuariosP);
+                    miStream.Close();
                 }
 
             }

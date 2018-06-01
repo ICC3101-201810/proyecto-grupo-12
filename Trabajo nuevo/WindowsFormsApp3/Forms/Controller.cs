@@ -50,16 +50,6 @@ namespace WindowsFormsApp3
             Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(miStream, usuarios);
             miStream.Close();
-
-            BinaryFormatter formatter2 = new BinaryFormatter();
-            Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter2.Serialize(miStream2, ReservasCancha);
-            miStream2.Close();
-
-            BinaryFormatter formatter3 = new BinaryFormatter();
-            Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter3.Serialize(miStream3, ReservasEstudio);
-            miStream3.Close();
         }
         private static void Deserializar()
         {
@@ -69,16 +59,6 @@ namespace WindowsFormsApp3
                 Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 usuarios = (List<Persona>)formatter.Deserialize(miStream);
                 miStream.Close();
-
-                BinaryFormatter formatter2 = new BinaryFormatter();
-                Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
-                ReservasCancha = (List<Reserva>)formatter2.Deserialize(miStream2);
-                miStream2.Close();
-
-                BinaryFormatter formatter3 = new BinaryFormatter();
-                Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
-                ReservasEstudio = (List<Reserva>)formatter3.Deserialize(miStream3);
-                miStream3.Close();
             }
         }
         public static bool LogIn(Persona usu)
@@ -96,6 +76,7 @@ namespace WindowsFormsApp3
                         if (usu.contra == p.contra)
                         {
                             p.logedin = true;
+                            usu = p;
                             current = p;
                             return true;
                         }
@@ -105,9 +86,15 @@ namespace WindowsFormsApp3
             }
         }
 
-        public static void LogOut()
+        public static void LogOut(List<Persona> ps)
         {
-            current = null;
+            foreach (Persona p in ps)
+            {
+                if (p.logedin == true)
+                {
+                    p.logedin = false;
+                }
+            }
         }
 
         public static Persona ReturnCurrent()
@@ -115,55 +102,60 @@ namespace WindowsFormsApp3
             return current;
         } 
 
-        public static void AddReserva(Reserva res)
+        /*
+        Form6 Reservas1;
+        
+        public Controller(Form6 Reservas1)
         {
-            if(res.Espacio=="Estudio")
-            {
-                GetReservasEstudio().Add(res);
-            }
-            else
-            {
-                GetReservasCancha().Add(res);
-            }
+            ReservasCancha = new List<Reserva>();
+            ReservasEstudio = new List<Reserva>();
+            Reserva res1 = new Reserva("Estudio", "12/05", "Sala 10", "195287643", "10:00-11:00");
+            Reserva res2 = new Reserva("Cancha", "12/05", "Cancha 1", "195287643", "13:00-14:00");
+            ReservasCancha.Add(res2);
+            ReservasEstudio.Add(res1);
+            this.Reservas1 = Reservas1;
+            this.Reservas1.OnAgregarReserva += Registro1_OnAgregarReserva;
         }
 
-        public static bool ComprobarReserva(Reserva res)
+        private void Registro1_OnAgregarReserva(object sender, AgregarReservaArgs e)
         {
-            string espacio = res.Espacio;
-            if (espacio=="Estudio")
+            if (e.Espacio == "Estudio")
             {
-                foreach (Reserva reservita in GetReservasEstudio())
+                Reserva res = new Reserva(e.Espacio, e.Dia, e.Numero, e.IdReservista, e.Bloque);
+                foreach (Reserva reservita in ReservasEstudio)
                 {
-                    if (res.Dia!= reservita.Dia && res.Bloque!= reservita.Bloque && res.Numero!= reservita.Numero)
+                    if (ReservasCancha.Contains(res))
                     {
-                        return true;
+                        Reservas1.Remover(res.Bloque);
+                        MessageBox.Show("no disponible");
+                        break;
                     }
                     else
                     {
-                        return false;
+                        ReservasEstudio.Add(res);
+                        MessageBox.Show("RESERVA HECHA");
+                        break;
                     }
                 }
-                return false;
             }
-            if (espacio == "Cancha")
+            if (e.Espacio == "Cancha")
             {
-                foreach (Reserva reservita in GetReservasCancha())
+                Reserva res = new Reserva(e.Espacio, e.Dia, e.Numero, e.IdReservista, e.Bloque);
+                foreach (Reserva reservita in ReservasCancha)
                 {
-                    if (res.Dia != reservita.Dia && res.Bloque != reservita.Bloque && res.Numero != reservita.Numero)
+                    if (ReservasCancha.Contains(res))
                     {
-                        return true;
+                        Reservas1.Remover(res.Bloque);
+                        break;
                     }
                     else
                     {
-                        return false;
+                        ReservasCancha.Add(res);
+                        break;
                     }
                 }
-                return false;
-            }
-            else
-            {
-                return false;
             }
         }
+        */
     }
 }

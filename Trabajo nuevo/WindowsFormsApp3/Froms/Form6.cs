@@ -15,7 +15,7 @@ namespace WindowsFormsApp3.Froms
     public partial class Form6 : Form
     {
         Reserva res;
-        Form 1 parent;
+        Form1 parent;
         
         public Form6()
         {
