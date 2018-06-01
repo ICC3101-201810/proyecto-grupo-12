@@ -50,6 +50,16 @@ namespace WindowsFormsApp3
             Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(miStream, usuarios);
             miStream.Close();
+
+            BinaryFormatter formatter2 = new BinaryFormatter();
+            Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter2.Serialize(miStream2, ReservasCancha);
+            miStream2.Close();
+
+            BinaryFormatter formatter3 = new BinaryFormatter();
+            Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
+            formatter3.Serialize(miStream3, ReservasEstudio);
+            miStream3.Close();
         }
         private static void Deserializar()
         {
@@ -59,6 +69,16 @@ namespace WindowsFormsApp3
                 Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 usuarios = (List<Persona>)formatter.Deserialize(miStream);
                 miStream.Close();
+
+                BinaryFormatter formatter2 = new BinaryFormatter();
+                Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+                ReservasCancha = (List<Reserva>)formatter2.Deserialize(miStream2);
+                miStream2.Close();
+
+                BinaryFormatter formatter3 = new BinaryFormatter();
+                Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+                ReservasEstudio = (List<Reserva>)formatter3.Deserialize(miStream3);
+                miStream3.Close();
             }
         }
         public static bool LogIn(Persona usu)
