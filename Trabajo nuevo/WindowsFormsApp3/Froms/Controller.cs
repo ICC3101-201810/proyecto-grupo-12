@@ -22,6 +22,9 @@ namespace WindowsFormsApp3
         {
             ReservasCancha = new List<Reserva>();
             ReservasEstudio = new List<Reserva>();
+            Reserva res1 = new Reserva(null, null, null, null, null);
+            ReservasCancha.Add(res1);
+            ReservasEstudio.Add(res1);
             usuarios = new List<Persona>();
             Deserializar();
         }
@@ -50,16 +53,6 @@ namespace WindowsFormsApp3
             Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Create, FileAccess.Write, FileShare.None);
             formatter.Serialize(miStream, usuarios);
             miStream.Close();
-
-            BinaryFormatter formatter2 = new BinaryFormatter();
-            Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter2.Serialize(miStream2, ReservasCancha);
-            miStream2.Close();
-
-            BinaryFormatter formatter3 = new BinaryFormatter();
-            Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter3.Serialize(miStream3, ReservasEstudio);
-            miStream3.Close();
         }
         private static void Deserializar()
         {
@@ -69,16 +62,6 @@ namespace WindowsFormsApp3
                 Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 usuarios = (List<Persona>)formatter.Deserialize(miStream);
                 miStream.Close();
-
-                BinaryFormatter formatter2 = new BinaryFormatter();
-                Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
-                ReservasCancha = (List<Reserva>)formatter2.Deserialize(miStream2);
-                miStream2.Close();
-
-                BinaryFormatter formatter3 = new BinaryFormatter();
-                Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
-                ReservasEstudio = (List<Reserva>)formatter3.Deserialize(miStream3);
-                miStream3.Close();
             }
         }
         public static bool LogIn(Persona usu)
@@ -96,6 +79,7 @@ namespace WindowsFormsApp3
                         if (usu.contra == p.contra)
                         {
                             p.logedin = true;
+                            usu = p;
                             current = p;
                             return true;
                         }
@@ -105,9 +89,15 @@ namespace WindowsFormsApp3
             }
         }
 
-        public static void LogOut()
+        public static void LogOut(List<Persona> ps)
         {
-            current = null;
+            foreach (Persona p in ps)
+            {
+                if (p.logedin == true)
+                {
+                    p.logedin = false;
+                }
+            }
         }
 
         public static Persona ReturnCurrent()
