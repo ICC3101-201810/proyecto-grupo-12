@@ -61,5 +61,10 @@ namespace WindowsFormsApp3.Froms
         {
 
         }
+        protected override void OnClosed(EventArgs e)
+        {
+            parent.Show();
+            base.OnClosed(e);
+        }
     }
 }

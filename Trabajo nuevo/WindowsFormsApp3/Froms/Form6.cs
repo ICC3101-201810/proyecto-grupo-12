@@ -14,14 +14,23 @@ namespace WindowsFormsApp3.Froms
 {
     public partial class Form6 : Form
     {
-        public Form6()
+        Form3 parent;
+
+        public Form6(Form3 parent)
         {
+            this.parent = parent;
             InitializeComponent();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
 
+        protected override void OnClosed(EventArgs e)
+        {
+            parent.Show();
+            base.OnClosed(e);
         }
     }
 }

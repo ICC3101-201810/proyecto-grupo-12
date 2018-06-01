@@ -20,7 +20,7 @@ namespace WindowsFormsApp3.Froms
         {
             this.parent = parent;
             InitializeComponent();
-            if (Controller.ReturnCurrent().logedin == true)
+            if (Controller.ReturnCurrent().ocupacion == Persona.Ocupacion.Administrador)
             {
                 opcionesAdministradorToolStripMenuItem.Visible = true;
             }
@@ -64,9 +64,15 @@ namespace WindowsFormsApp3.Froms
 
         private void reservarCanchaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form6 openform6 = new Form6();
+            Form6 openform6 = new Form6(this);
             openform6.Show();
-            Visible = false;
+            this.Hide();
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            parent.Show();
+            base.OnClosed(e);
         }
     }
 }
