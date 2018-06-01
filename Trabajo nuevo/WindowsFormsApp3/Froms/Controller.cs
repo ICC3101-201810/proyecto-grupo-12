@@ -119,60 +119,55 @@ namespace WindowsFormsApp3
             return current;
         } 
 
-        /*
-        Form6 Reservas1;
-        
-        public Controller(Form6 Reservas1)
+        public static void AddReserva(Reserva res)
         {
-            ReservasCancha = new List<Reserva>();
-            ReservasEstudio = new List<Reserva>();
-            Reserva res1 = new Reserva("Estudio", "12/05", "Sala 10", "195287643", "10:00-11:00");
-            Reserva res2 = new Reserva("Cancha", "12/05", "Cancha 1", "195287643", "13:00-14:00");
-            ReservasCancha.Add(res2);
-            ReservasEstudio.Add(res1);
-            this.Reservas1 = Reservas1;
-            this.Reservas1.OnAgregarReserva += Registro1_OnAgregarReserva;
+            if(res.Espacio=="Estudio")
+            {
+                ReservasEstudio.Add(res);
+            }
+            else
+            {
+                ReservasCancha.Add(res);
+            }
         }
 
-        private void Registro1_OnAgregarReserva(object sender, AgregarReservaArgs e)
+        public static bool ComprobarReserva(Reserva res)
         {
-            if (e.Espacio == "Estudio")
+            string espacio = res.Espacio;
+            if (espacio=="Estudio")
             {
-                Reserva res = new Reserva(e.Espacio, e.Dia, e.Numero, e.IdReservista, e.Bloque);
-                foreach (Reserva reservita in ReservasEstudio)
+                foreach (Reserva reservita in GetReservasEstudio())
                 {
-                    if (ReservasCancha.Contains(res))
+                    if (res.Dia!= reservita.Dia && res.Bloque!= reservita.Bloque && res.Numero!= reservita.Numero)
                     {
-                        Reservas1.Remover(res.Bloque);
-                        MessageBox.Show("no disponible");
-                        break;
+                        return true;
                     }
                     else
                     {
-                        ReservasEstudio.Add(res);
-                        MessageBox.Show("RESERVA HECHA");
-                        break;
+                        return false;
                     }
                 }
+                return false;
             }
-            if (e.Espacio == "Cancha")
+            if (espacio == "Cancha")
             {
-                Reserva res = new Reserva(e.Espacio, e.Dia, e.Numero, e.IdReservista, e.Bloque);
-                foreach (Reserva reservita in ReservasCancha)
+                foreach (Reserva reservita in GetReservasCancha())
                 {
-                    if (ReservasCancha.Contains(res))
+                    if (res.Dia != reservita.Dia && res.Bloque != reservita.Bloque && res.Numero != reservita.Numero)
                     {
-                        Reservas1.Remover(res.Bloque);
-                        break;
+                        return true;
                     }
                     else
                     {
-                        ReservasCancha.Add(res);
-                        break;
+                        return false;
                     }
                 }
+                return false;
+            }
+            else
+            {
+                return false;
             }
         }
-        */
     }
 }

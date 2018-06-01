@@ -23,22 +23,5 @@ namespace WindowsFormsApp3
             this.numero = numero;
             this.ocupacion = ocupacion;
         }
-
-        public void AgregarUsuarioP (Persona p)
-        {
-            Controller.AddPersona(p);            
-        }
-
-        public Persona GetPersona(string uId, List<Persona> p)
-        {
-            foreach (Persona per in p)
-            {
-                if (per.uId == uId)
-                {
-                    return per;
-                }
-            }
-            return null;
-        }
     }
 }
