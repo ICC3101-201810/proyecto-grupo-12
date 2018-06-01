@@ -14,14 +14,17 @@ namespace WindowsFormsApp3.Froms
 {
     public partial class Form4 : Form
     {
-        Form3 parent;
+        List<Persona> usuariosP;
+        Persona p;
 
-        public Form4(Form3 parent)
+        public Form4()
         {
-            this.parent = parent;
             InitializeComponent();
-
-            foreach (Persona p in Controller.GetUsuarios())
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
+            usuariosP = (List<Persona>)formatter.Deserialize(miStream);
+            miStream.Close();
+            foreach (Persona p in usuariosP)
             {
                 dataGridView1.Rows.Add(p.nombre, p.mail, p.uId, p.ocupacion);
             }
@@ -29,7 +32,9 @@ namespace WindowsFormsApp3.Froms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Froms.Form3 openform3 = new Froms.Form3();
+            openform3.Show();
+            Visible = false;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)

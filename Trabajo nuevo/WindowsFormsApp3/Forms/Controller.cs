@@ -76,6 +76,7 @@ namespace WindowsFormsApp3
                         if (usu.contra == p.contra)
                         {
                             p.logedin = true;
+                            usu = p;
                             current = p;
                             return true;
                         }
@@ -85,9 +86,15 @@ namespace WindowsFormsApp3
             }
         }
 
-        public static void LogOut()
+        public static void LogOut(List<Persona> ps)
         {
-            current = null;
+            foreach (Persona p in ps)
+            {
+                if (p.logedin == true)
+                {
+                    p.logedin = false;
+                }
+            }
         }
 
         public static Persona ReturnCurrent()
