@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 namespace WindowsFormsApp3
 {
+    [Serializable]
     public class Reserva
     {
         public string Espacio { get; set; }

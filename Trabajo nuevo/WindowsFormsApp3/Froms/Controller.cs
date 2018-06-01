@@ -68,13 +68,17 @@ namespace WindowsFormsApp3
                 BinaryFormatter formatter = new BinaryFormatter();
                 Stream miStream = new FileStream("datosUsuarios.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 usuarios = (List<Persona>)formatter.Deserialize(miStream);
-                miStream.Close();
-
+                miStream.Close();    
+            }
+            if (File.Exists("reservasCanchas.txt"))
+            {
                 BinaryFormatter formatter2 = new BinaryFormatter();
                 Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 ReservasCancha = (List<Reserva>)formatter2.Deserialize(miStream2);
                 miStream2.Close();
-
+            }
+            if (File.Exists("reservasSalas.txt"))
+            {
                 BinaryFormatter formatter3 = new BinaryFormatter();
                 Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Open, FileAccess.Read, FileShare.None);
                 ReservasEstudio = (List<Reserva>)formatter3.Deserialize(miStream3);
