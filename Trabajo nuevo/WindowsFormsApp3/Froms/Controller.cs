@@ -22,6 +22,9 @@ namespace WindowsFormsApp3
         {
             ReservasCancha = new List<Reserva>();
             ReservasEstudio = new List<Reserva>();
+            Reserva res1 = new Reserva(null, null, null, null, null);
+            ReservasCancha.Add(res1);
+            ReservasEstudio.Add(res1);
             usuarios = new List<Persona>();
             Deserializar();
         }
@@ -53,12 +56,12 @@ namespace WindowsFormsApp3
 
             BinaryFormatter formatter2 = new BinaryFormatter();
             Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter2.Serialize(miStream2, ReservasCancha);
+            formatter2.Serialize(miStream2, usuarios);
             miStream2.Close();
 
             BinaryFormatter formatter3 = new BinaryFormatter();
             Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter3.Serialize(miStream3, ReservasEstudio);
+            formatter3.Serialize(miStream3, usuarios);
             miStream3.Close();
         }
         private static void Deserializar()
