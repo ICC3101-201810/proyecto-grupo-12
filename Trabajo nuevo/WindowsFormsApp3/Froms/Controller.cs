@@ -56,12 +56,12 @@ namespace WindowsFormsApp3
 
             BinaryFormatter formatter2 = new BinaryFormatter();
             Stream miStream2 = new FileStream("reservasCanchas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter2.Serialize(miStream2, usuarios);
+            formatter2.Serialize(miStream2, ReservasCancha);
             miStream2.Close();
 
             BinaryFormatter formatter3 = new BinaryFormatter();
             Stream miStream3 = new FileStream("reservasSalas.txt", FileMode.Create, FileAccess.Write, FileShare.None);
-            formatter3.Serialize(miStream3, usuarios);
+            formatter3.Serialize(miStream3, ReservasEstudio);
             miStream3.Close();
         }
         private static void Deserializar()
